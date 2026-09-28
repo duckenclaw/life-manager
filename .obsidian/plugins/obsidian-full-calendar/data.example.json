@@ -1,0 +1,13 @@
+{
+  "defaultCalendar": 0,
+  "firstDay": 1,
+  "timeFormat24h": true,
+  "initialView": {
+    "desktop": "timeGridWeek",
+    "mobile": "timeGrid3Days"
+  },
+  "calendarSources": [
+    { "type": "local", "directory": "Events", "color": "#2f9e44" },
+    { "type": "ical", "url": "PASTE_YOUR_SECRET_ICS_URL", "color": "#1c7ed6" }
+  ]
+}

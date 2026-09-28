@@ -1,0 +1,33 @@
+# ── Personal config ─────────────────────────────
+.env
+
+# ── Personal notes (keep folders, ignore contents) ──
+Daily/*
+!Daily/.gitkeep
+Events/*
+!Events/.gitkeep
+Tasks/*
+!Tasks/.gitkeep
+
+# ── Obsidian: per-device UI state & caches ──────
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+.obsidian/types.json
+.trash/
+
+# ── Obsidian: plugin code (install from Community plugins) ──
+# Only each plugin's settings (data.json) are tracked.
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/manifest.json
+.obsidian/plugins/*/styles.css
+
+# Full Calendar settings contain your private calendar ICS link
+.obsidian/plugins/obsidian-full-calendar/data.json
+
+# ── OS / editors ────────────────────────────────
+.DS_Store
+.idea/
+.vscode/
+*.icloud
+.claude
