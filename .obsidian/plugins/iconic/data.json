@@ -31,7 +31,38 @@
   "fileIcons": {},
   "bookmarkIcons": {},
   "tagIcons": {},
-  "propertyIcons": {},
+  "propertyIcons": {
+    "cat_play": {
+      "icon": "lucide-cat"
+    },
+    "guitar_min": {
+      "icon": "lucide-guitar"
+    },
+    "litter": {
+      "icon": "lucide-paw-print"
+    },
+    "meals": {
+      "icon": "lucide-beef"
+    },
+    "pages": {
+      "icon": "lucide-book-open-text"
+    },
+    "skincare_am": {
+      "icon": "lucide-sunrise"
+    },
+    "skincare_pm": {
+      "icon": "lucide-sunset"
+    },
+    "smoking": {
+      "icon": "lucide-cigarette"
+    },
+    "songs_learned": {
+      "icon": "lucide-music"
+    },
+    "training": {
+      "icon": "lucide-dumbbell"
+    }
+  },
   "ribbonIcons": {},
   "fileRules": [
     {
