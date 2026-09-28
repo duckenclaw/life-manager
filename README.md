@@ -10,6 +10,15 @@ A tasks, habits and events system for Obsidian that works on desktop and mobile.
 5. Full Calendar: copy `.obsidian/plugins/obsidian-full-calendar/data.example.json` to `data.json` next to it, or add the calendars in the plugin's settings. Then add your calendar's secret ICS URL.
 6. Homepage: set it to open **Daily note**.
 7. Create your task area notes: `Tasks/Work.md`, `Uni.md`, `Gamedev.md`, `Personal.md`, `Inbox.md`.
+8. Optional (macOS): Apple Reminders sync. Needs Xcode Command Line Tools (`xcode-select --install`). The first sync compiles `Scripts/reminders-bridge`, and macOS asks you to allow Obsidian to access Reminders.
+
+## Apple Reminders sync (Mac)
+Each `Tasks/<Area>.md` syncs both ways with the Reminders list of the same name. Set `REMINDERS_LISTS` in `.env` to use lists with different names. Sync runs when a daily note opens (at most once a minute) and from its 🔄 button. What syncs:
+- Task name, date (📅, or ⏳ if there's no 📅) and completion, in both directions. If both sides changed the same thing, Obsidian wins.
+- Reminders you add on your phone are appended to the matching Tasks note.
+- Deleting a reminder marks its task cancelled (`[-]`). Deleting a task completes its reminder.
+
+Tasks are matched by a `🆔` id. The id-to-reminder mapping lives in `.reminders-sync.json`, which is git-ignored.
 
 ## Structure
 | Path | Purpose |
@@ -18,6 +27,7 @@ A tasks, habits and events system for Obsidian that works on desktop and mobile.
 | `Dashboards/Habits.md` | Tables, heatmaps and charts |
 | `Dashboards/Tasks.md` | Tasks by area, overdue and upcoming |
 | `Scripts/fetchCommits.js` | Counts your GitHub commits for the day |
+| `Scripts/syncReminders.js`, `Scripts/reminders-bridge/` | Two-way sync with Apple Reminders (EventKit helper) |
 | `Daily/`, `Tasks/`, `Events/` | Your personal data (git-ignored) |
 
 ## Customising habits

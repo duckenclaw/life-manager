@@ -2,7 +2,7 @@
 guitar_min: 0
 songs_learned: 0
 training: false
-cigarettes: 0
+smoking: 0
 meals: 0
 commits: 0
 skincare_am: false
@@ -25,13 +25,28 @@ pages: 0
 > [!note]+ Counters
 > - 🎸 Guitar `INPUT[slider(addLabels, minValue(0), maxValue(180), stepSize(5)):guitar_min]` **`VIEW[{guitar_min}]` min** `BUTTON[guitar-plus15]`
 > - 🎵 New songs `BUTTON[song-minus]` **`VIEW[{songs_learned}]`** `BUTTON[song-plus]`
-> - 🚬 Smoking `BUTTON[smoke-minus]` **`VIEW[{cigarettes}]`** `BUTTON[smoke-plus]`
+> - 🚬 Smoking `BUTTON[smoke-minus]` **`VIEW[{smoking}]`** `BUTTON[smoke-plus]`
 > - 🍽️ Meals `BUTTON[meal-minus]` **`VIEW[{meals}]`** `BUTTON[meal-plus]`
 > - 😺 Played with cat `BUTTON[cat-minus]` **`VIEW[{cat_play}]`** `BUTTON[cat-plus]`
 > - 📖 Pages read `INPUT[number:pages]` `BUTTON[pages-plus1]` `BUTTON[pages-plus10]`
 > - 💻 GitHub commits `INPUT[number:commits]` `BUTTON[fetch-commits]`
 
 ## Today
+
+`BUTTON[sync-reminders]`
+
+```js-engine
+// Syncs Tasks/ with Apple Reminders when this note opens (Mac only, at most once a minute).
+if (app.isMobile) return "📱 Reminders sync runs on the Mac.";
+const last = Number(localStorage.getItem("reminders-sync-last") ?? 0);
+if (Date.now() - last < 60_000) return localStorage.getItem("reminders-sync-status") ?? "";
+localStorage.setItem("reminders-sync-last", String(Date.now()));
+const code = await app.vault.adapter.read("Scripts/syncReminders.js");
+const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+const status = await new AsyncFunction("app", "obsidian", code)(app, typeof obsidian !== "undefined" ? obsidian : undefined);
+localStorage.setItem("reminders-sync-status", status);
+return status;
+```
 
 ```tasks
 not done
@@ -97,7 +112,7 @@ hidden: true
 style: default
 actions:
   - type: updateMetadata
-    bindTarget: cigarettes
+    bindTarget: smoking
     evaluate: true
     value: Math.max(0, x - 1)
 ```
@@ -109,7 +124,7 @@ hidden: true
 style: destructive
 actions:
   - type: updateMetadata
-    bindTarget: cigarettes
+    bindTarget: smoking
     evaluate: true
     value: x + 1
 ```
@@ -194,4 +209,14 @@ style: default
 actions:
   - type: js
     file: Scripts/fetchCommits.js
+```
+
+```meta-bind-button
+label: "🔄 Sync Reminders"
+id: sync-reminders
+hidden: true
+style: default
+actions:
+  - type: js
+    file: Scripts/syncReminders.js
 ```
