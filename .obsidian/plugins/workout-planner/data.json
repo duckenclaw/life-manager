@@ -1,0 +1,25 @@
+{
+  "csvLogFilePath": "Training/Logs/workout_logs.csv",
+  "exerciseFolderPath": "Training/Exercises",
+  "defaultExercise": "",
+  "chartType": "volume",
+  "dateRange": 30,
+  "showTrendLine": true,
+  "chartHeight": 400,
+  "defaultExactMatch": true,
+  "timerPresets": {},
+  "defaultTimerPreset": null,
+  "exerciseBlockTemplate": "## {{exercise}}\n\n```workout-timer\nduration: {{duration}}\nexercise: {{exercise}}\nworkout: {{workout}}\npreset: {{preset}}\n```\n\n```workout-log\nexercise: {{exercise}}\nworkout: {{workout}}\n```",
+  "weightIncrement": 2.5,
+  "achievedTargets": {},
+  "customProtocols": [],
+  "setDuration": 45,
+  "repDuration": 5,
+  "defaultRepsPerSet": 0,
+  "recentExercises": [
+    "Bent-Arm Barbell Pullover",
+    "External Rotation"
+  ],
+  "quickWeightIncrement": 2.5,
+  "weightUnit": "kg"
+}
