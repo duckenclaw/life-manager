@@ -10,6 +10,7 @@ skincare_pm: false
 litter: false
 cat_play: 0
 pages: 0
+planned_exercises: []
 ---
 # <% tp.date.now("dddd, D MMMM YYYY", 0, tp.file.title, "YYYY-MM-DD") %>
 
@@ -61,6 +62,36 @@ Completed today:
 ```tasks
 done on <% tp.file.title %>
 short mode
+```
+
+## 🍽️ Meals
+
+`BUTTON[add-recipe]` `BUTTON[food-search]`
+
+```macros
+id: <% tp.file.title %>
+```
+
+```js-engine
+const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
+const rc = engine.reactive(async () => engine.markdown.create(await run("Scripts/nutrition.js", { path: context.file.path, mode: "day" })));
+component.registerEvent(app.metadataCache.on("changed", (f) => { if (f.path === context.file.path) rc.refresh(); }));
+return rc;
+```
+
+## 🏋️ Training
+
+**Plan:** `INPUT[inlineListSuggester(optionQuery("Training/Exercises")):planned_exercises]`
+
+`BUTTON[log-set]` `BUTTON[import-exercise]`
+
+```js-engine
+const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
+const rc = engine.reactive(async () => engine.markdown.create(await run("Scripts/trainingSummary.js", { path: context.file.path })));
+const csv = app.plugins.plugins["workout-planner"]?.settings?.csvLogFilePath ?? "Training/Logs/workout_logs.csv";
+component.registerEvent(app.metadataCache.on("changed", (f) => { if (f.path === context.file.path) rc.refresh(); }));
+component.registerEvent(app.vault.on("modify", (f) => { if (f.path === csv) rc.refresh(); }));
+return rc;
 ```
 
 ## Notes
@@ -219,4 +250,44 @@ style: default
 actions:
   - type: js
     file: Scripts/syncReminders.js
+```
+
+```meta-bind-button
+label: "🍽️ Add recipe"
+id: add-recipe
+hidden: true
+style: primary
+actions:
+  - type: js
+    file: Scripts/addRecipeToDay.js
+```
+
+```meta-bind-button
+label: "🔎 Find food"
+id: food-search
+hidden: true
+style: default
+actions:
+  - type: command
+    command: macros:open-live-search
+```
+
+```meta-bind-button
+label: "🏋️ Log set"
+id: log-set
+hidden: true
+style: primary
+actions:
+  - type: js
+    file: Scripts/quickLog.js
+```
+
+```meta-bind-button
+label: "📥 Import exercise"
+id: import-exercise
+hidden: true
+style: default
+actions:
+  - type: js
+    file: Scripts/importExercise.js
 ```

@@ -1,0 +1,9 @@
+{
+  "storageFolder": "Food/Ingredients",
+  "usdaEnabled": true,
+  "usdaApiKey": "",
+  "openFoodFactsEnabled": false,
+  "fatSecretEnabled": false,
+  "micronutrientTrackingEnabled": true,
+  "energyUnit": "kcal"
+}

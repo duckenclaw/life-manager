@@ -7,11 +7,15 @@
   "auto_jump_to_cursor": false,
   "jump_to_cursor_after_file_name": false,
   "shell_path": "",
-  "user_scripts_folder": "Scripts",
+  "user_scripts_folder": "",
   "folder_templates": [
     {
       "folder": "Daily",
       "template": "Templates/Daily.md"
+    },
+    {
+      "folder": "Food/Recipes",
+      "template": "Templates/Recipe.md"
     }
   ],
   "file_templates": [],

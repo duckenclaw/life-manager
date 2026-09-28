@@ -35,3 +35,9 @@ Tasks/*
 # ── Apple Reminders sync ────────────────────────
 .reminders-sync.json
 Scripts/reminders-bridge/reminders-bridge
+
+# ── Meal & training planner ─────────────────────
+# Macros settings hold your USDA API key (see data.example.json)
+.obsidian/plugins/macros/data.json
+Training/Logs/workout_logs.csv
+Scripts/cache/
