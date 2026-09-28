@@ -31,3 +31,7 @@ Tasks/*
 .vscode/
 *.icloud
 .claude
+
+# ── Apple Reminders sync ────────────────────────
+.reminders-sync.json
+Scripts/reminders-bridge/reminders-bridge

@@ -7,7 +7,7 @@ TABLE WITHOUT ID
   guitar_min AS "🎸 min",
   songs_learned AS "🎵",
   choice(training, "✅", "·") AS "🏋️",
-  cigarettes AS "🚬",
+  smoking AS "🚬",
   meals AS "🍽️",
   commits AS "💻",
   choice(skincare_am, "☀️", "·") + choice(skincare_pm, "🌙", "·") AS "🧴",
@@ -32,7 +32,7 @@ dv.table(["Habit", "This week", "Last week"], [
   ["🎸 Guitar (min, total)", sum(thisW, "guitar_min"), sum(lastW, "guitar_min")],
   ["🎵 Songs learned", sum(thisW, "songs_learned"), sum(lastW, "songs_learned")],
   ["🏋️ Training days", cnt(thisW, "training"), cnt(lastW, "training")],
-  ["🚬 Cigarettes (avg/day)", avg(thisW, "cigarettes"), avg(lastW, "cigarettes")],
+  ["🚬 Smoking (avg/day)", avg(thisW, "smoking"), avg(lastW, "smoking")],
   ["🍽️ Meals (avg/day)", avg(thisW, "meals"), avg(lastW, "meals")],
   ["💻 Commits", sum(thisW, "commits"), sum(lastW, "commits")],
   ["🧴 Skincare AM / PM", `${cnt(thisW, "skincare_am")} / ${cnt(thisW, "skincare_pm")}`, `${cnt(lastW, "skincare_am")} / ${cnt(lastW, "skincare_pm")}`],
@@ -65,7 +65,7 @@ heat("🏋️ Training", green, p => p.training ? 1 : 0, 1);
 heat("🧴 Skincare (AM + PM)", blue, p => (p.skincare_am ? 1 : 0) + (p.skincare_pm ? 1 : 0), 2);
 heat("🐈 Litter", green, p => p.litter ? 1 : 0, 1);
 heat("🎸 Guitar minutes", green, p => Number(p.guitar_min) || 0, 60);
-heat("🚬 Smoking", red, p => Number(p.cigarettes) || 0, 15);
+heat("🚬 Smoking", red, p => Number(p.smoking) || 0, 15);
 ```
 
 ## Trends (last 30 days)
@@ -85,7 +85,7 @@ line:
 
 ```tracker
 searchType: frontmatter
-searchTarget: cigarettes, meals
+searchTarget: smoking, meals
 folder: Daily
 startDate: -30d
 endDate: 0d
