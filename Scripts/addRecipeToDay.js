@@ -76,7 +76,7 @@ for (const raw of block.split("\n")) {
 	if (!line || /^id:/i.test(line) || /^(meal|group):/i.test(line)) continue;
 	const [name, qty] = line.replace(/^-\s*/, "").split(":").map((s) => s.trim());
 	const g = parseFloat(String(qty ?? "100").match(/(\d+(\.\d+)?)/)?.[1] ?? "100");
-	if (name) lines.push(`- ${name}:${Math.round(g * factor)}g`);
+	if (name) lines.push(`- ${name}:${Math.round(g * factor * 10) / 10}g`); // 0.1 g precision keeps pinches of spice
 }
 if (!lines.length) {
 	new Notice(`${recipe.basename} has no ingredients yet.`);

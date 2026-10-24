@@ -7,13 +7,16 @@ TABLE WITHOUT ID
   guitar_min AS "🎸 min",
   songs_learned AS "🎵",
   choice(training, "✅", "·") AS "🏋️",
+  choice(stretching, "✅", "·") AS "🧘",
   smoking AS "🚬",
   meals AS "🍽️",
   commits AS "💻",
   choice(skincare_am, "☀️", "·") + choice(skincare_pm, "🌙", "·") AS "🧴",
   choice(litter, "✅", "·") AS "🐈",
+  choice(cat_clean, "✅", "·") AS "🧹",
   cat_play AS "😺",
-  pages AS "📖"
+  pages AS "📖",
+  weight AS "⚖️"
 FROM "Daily"
 WHERE file.day AND file.day >= date(today) - dur(14 days)
 SORT file.day DESC
@@ -32,13 +35,16 @@ dv.table(["Habit", "This week", "Last week"], [
   ["🎸 Guitar (min, total)", sum(thisW, "guitar_min"), sum(lastW, "guitar_min")],
   ["🎵 Songs learned", sum(thisW, "songs_learned"), sum(lastW, "songs_learned")],
   ["🏋️ Training days", cnt(thisW, "training"), cnt(lastW, "training")],
+  ["🧘 Stretching days", cnt(thisW, "stretching"), cnt(lastW, "stretching")],
   ["🚬 Smoking (avg/day)", avg(thisW, "smoking"), avg(lastW, "smoking")],
   ["🍽️ Meals (avg/day)", avg(thisW, "meals"), avg(lastW, "meals")],
   ["💻 Commits", sum(thisW, "commits"), sum(lastW, "commits")],
   ["🧴 Skincare AM / PM", `${cnt(thisW, "skincare_am")} / ${cnt(thisW, "skincare_pm")}`, `${cnt(lastW, "skincare_am")} / ${cnt(lastW, "skincare_pm")}`],
   ["🐈 Litter cleaned", cnt(thisW, "litter"), cnt(lastW, "litter")],
+  ["🧹 Cat cleaning", cnt(thisW, "cat_clean"), cnt(lastW, "cat_clean")],
   ["😺 Cat play (times)", sum(thisW, "cat_play"), sum(lastW, "cat_play")],
   ["📖 Pages", sum(thisW, "pages"), sum(lastW, "pages")],
+  ["⚖️ Weight (avg kg)", avg(thisW, "weight"), avg(lastW, "weight")],
 ]);
 ```
 
@@ -64,6 +70,8 @@ const heat = (title, colors, valueFn, scaleEnd) => {
 heat("🏋️ Training", green, p => p.training ? 1 : 0, 1);
 heat("🧴 Skincare (AM + PM)", blue, p => (p.skincare_am ? 1 : 0) + (p.skincare_pm ? 1 : 0), 2);
 heat("🐈 Litter", green, p => p.litter ? 1 : 0, 1);
+heat("🧹 Cat cleaning", green, p => p.cat_clean ? 1 : 0, 1);
+heat("🧘 Stretching", green, p => p.stretching ? 1 : 0, 1);
 heat("🎸 Guitar minutes", green, p => Number(p.guitar_min) || 0, 60);
 heat("🚬 Smoking", red, p => Number(p.smoking) || 0, 15);
 ```
@@ -119,4 +127,18 @@ bar:
   title: Cat play sessions
   yAxisLabel: times
   barColor: orange
+```
+
+```tracker
+searchType: frontmatter
+searchTarget: weight
+folder: Daily
+startDate: -30d
+endDate: 0d
+line:
+  title: Weight
+  yAxisLabel: kg
+  lineColor: teal
+  showLegend: false
+  fillGap: true
 ```

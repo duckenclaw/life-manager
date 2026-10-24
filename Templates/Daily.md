@@ -1,29 +1,37 @@
 ---
+skincare_am: false
+skincare_pm: false
 guitar_min: 0
 songs_learned: 0
-training: false
+stretching: false
 smoking: 0
 meals: 0
 commits: 0
-skincare_am: false
-skincare_pm: false
-litter: false
+cat_clean: false
 cat_play: 0
+litter: false
 pages: 0
+weight:
+training: false
 planned_exercises: []
 ---
 # <% tp.date.now("dddd, D MMMM YYYY", 0, tp.file.title, "YYYY-MM-DD") %>
 
 [[<% tp.date.now("YYYY-MM-DD", -1, tp.file.title, "YYYY-MM-DD") %>|← prev]] · [[Home]] · [[Dashboards/Habits|📊 Habits]] · [[Dashboards/Tasks|✅ Tasks]] · [[<% tp.date.now("YYYY-MM-DD", 1, tp.file.title, "YYYY-MM-DD") %>|next →]]
 
-## Habits
+## ⚡ Today
+
+`BUTTON[add-recipe]` `BUTTON[food-search]` `BUTTON[log-set]` `BUTTON[import-exercise]`
 
 > [!check]+ Checklist
 > - 🏋️ Training `INPUT[toggle:training]`
+> - 🧘 Stretching `INPUT[toggle:stretching]`
 > - 🧴 Skincare, morning `INPUT[toggle:skincare_am]` · evening `INPUT[toggle:skincare_pm]`
 > - 🐈 Clean litter `INPUT[toggle:litter]`
+> - 🧹 Cat cleaning `INPUT[toggle:cat_clean]`
 
 > [!note]+ Counters
+> - ⚖️ Weight `INPUT[number:weight]` kg
 > - 🎸 Guitar `INPUT[slider(addLabels, minValue(0), maxValue(180), stepSize(5)):guitar_min]` **`VIEW[{guitar_min}]` min** `BUTTON[guitar-plus15]`
 > - 🎵 New songs `BUTTON[song-minus]` **`VIEW[{songs_learned}]`** `BUTTON[song-plus]`
 > - 🚬 Smoking `BUTTON[smoke-minus]` **`VIEW[{smoking}]`** `BUTTON[smoke-plus]`
@@ -32,41 +40,10 @@ planned_exercises: []
 > - 📖 Pages read `INPUT[number:pages]` `BUTTON[pages-plus1]` `BUTTON[pages-plus10]`
 > - 💻 GitHub commits `INPUT[number:commits]` `BUTTON[fetch-commits]`
 
-## Today
+**Plan:** `INPUT[inlineListSuggester(optionQuery("Training/Exercises")):planned_exercises]`
 
-`BUTTON[sync-reminders]`
-
-```js-engine
-// Syncs Tasks/ with Apple Reminders when this note opens (Mac only, at most once a minute).
-if (app.isMobile) return "📱 Reminders sync runs on the Mac.";
-const last = Number(localStorage.getItem("reminders-sync-last") ?? 0);
-if (Date.now() - last < 60_000) return localStorage.getItem("reminders-sync-status") ?? "";
-localStorage.setItem("reminders-sync-last", String(Date.now()));
-const code = await app.vault.adapter.read("Scripts/syncReminders.js");
-const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-const status = await new AsyncFunction("app", "obsidian", code)(app, typeof obsidian !== "undefined" ? obsidian : undefined);
-localStorage.setItem("reminders-sync-status", status);
-return status;
-```
-
-```tasks
-not done
-(due on or before <% tp.file.title %>) OR (scheduled on or before <% tp.file.title %>)
-group by function task.file.filename.replace(".md", "")
-sort by priority
-short mode
-```
-
-Completed today:
-
-```tasks
-done on <% tp.file.title %>
-short mode
-```
 
 ## 🍽️ Meals
-
-`BUTTON[add-recipe]` `BUTTON[food-search]`
 
 ```macros
 id: <% tp.file.title %>
@@ -80,10 +57,6 @@ return rc;
 ```
 
 ## 🏋️ Training
-
-**Plan:** `INPUT[inlineListSuggester(optionQuery("Training/Exercises")):planned_exercises]`
-
-`BUTTON[log-set]` `BUTTON[import-exercise]`
 
 ```js-engine
 const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
@@ -240,16 +213,6 @@ style: default
 actions:
   - type: js
     file: Scripts/fetchCommits.js
-```
-
-```meta-bind-button
-label: "🔄 Sync Reminders"
-id: sync-reminders
-hidden: true
-style: default
-actions:
-  - type: js
-    file: Scripts/syncReminders.js
 ```
 
 ```meta-bind-button

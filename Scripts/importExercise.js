@@ -11,7 +11,9 @@ const CACHE = `${CACHE_DIR}/exercises.json`;
 const FOLDER = app.plugins.plugins["workout-planner"]?.settings?.exerciseFolderPath ?? "Training/Exercises";
 const TEMPLATE = "Templates/Exercise.md";
 
-// free-exercise-db muscle names → Workout Planner's canonical muscle groups (used for `tags`)
+// free-exercise-db muscle names → Workout Planner's canonical muscle groups (used for `tags`).
+// `tags` only holds the primary groups (max 3): Workout Planner's heatmap gives every tag the
+// full volume of a set, so adding secondary muscles there would over-count them.
 const MUSCLE_GROUPS = {
 	abdominals: "abs", abductors: "glutes", adductors: "quads", biceps: "biceps", calves: "calves",
 	chest: "chest", forearms: "forearms", glutes: "glutes", hamstrings: "hamstrings", lats: "back",
@@ -71,15 +73,14 @@ if (!file) {
 		.replace("<!-- instructions -->", `${images}\n\n${steps}`);
 	if (!app.vault.getAbstractFileByPath(FOLDER)) await app.vault.createFolder(FOLDER);
 	file = await app.vault.create(path, content);
-	const muscles = [...exercise.primaryMuscles, ...exercise.secondaryMuscles];
 	await app.fileManager.processFrontMatter(file, (fm) => {
 		Object.assign(fm, {
 			exercise_name: name,
 			exercise_type: EXERCISE_TYPES[exercise.category] ?? "strength",
-			tags: [...new Set(muscles.map((m) => MUSCLE_GROUPS[m]).filter(Boolean))],
+			tags: [...new Set(exercise.primaryMuscles.map((m) => MUSCLE_GROUPS[m]).filter(Boolean))].slice(0, 3),
 			equipment: exercise.equipment ? [exercise.equipment] : [],
 			primary_muscles: exercise.primaryMuscles,
-			secondary_muscles: exercise.secondaryMuscles,
+			secondary_muscles: exercise.secondaryMuscles.filter((m) => !exercise.primaryMuscles.includes(m)),
 			level: exercise.level,
 			category: exercise.category,
 			source: `free-exercise-db/${exercise.id}`,

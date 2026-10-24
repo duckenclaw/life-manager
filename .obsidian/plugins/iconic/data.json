@@ -32,6 +32,9 @@
   "bookmarkIcons": {},
   "tagIcons": {},
   "propertyIcons": {
+    "cat_clean": {
+      "icon": "lucide-spray-can"
+    },
     "cat_play": {
       "icon": "lucide-cat"
     },
@@ -59,8 +62,14 @@
     "songs_learned": {
       "icon": "lucide-music"
     },
+    "stretching": {
+      "icon": "lucide-person-standing"
+    },
     "training": {
       "icon": "lucide-dumbbell"
+    },
+    "weight": {
+      "icon": "lucide-scale"
     }
   },
   "ribbonIcons": {},

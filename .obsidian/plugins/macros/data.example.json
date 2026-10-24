@@ -2,7 +2,7 @@
   "storageFolder": "Food/Ingredients",
   "usdaEnabled": true,
   "usdaApiKey": "",
-  "openFoodFactsEnabled": false,
+  "openFoodFactsEnabled": true,
   "fatSecretEnabled": false,
   "micronutrientTrackingEnabled": true,
   "energyUnit": "kcal"

@@ -11,23 +11,13 @@ A tasks, habits and events system for Obsidian that works on desktop and mobile.
 5. Full Calendar: copy `.obsidian/plugins/obsidian-full-calendar/data.example.json` to `data.json` next to it, or add the calendars in the plugin's settings. Then add your calendar's secret ICS URL.
 6. Homepage: set it to open **Daily note**.
 7. Create your task area notes: `Tasks/Work.md`, `Uni.md`, `Gamedev.md`, `Personal.md`, `Inbox.md`.
-8. Optional (macOS): Apple Reminders sync. Needs Xcode Command Line Tools (`xcode-select --install`). The first sync compiles `Scripts/reminders-bridge`, and macOS asks you to allow Obsidian to access Reminders.
-
-## Apple Reminders sync (Mac)
-Each `Tasks/<Area>.md` syncs both ways with the Reminders list of the same name. Set `REMINDERS_LISTS` in `.env` to use lists with different names. Sync runs when a daily note opens (at most once a minute) and from its 🔄 button. What syncs:
-- Task name, date (📅, or ⏳ if there's no 📅) and completion, in both directions. If both sides changed the same thing, Obsidian wins.
-- Reminders you add on your phone are appended to the matching Tasks note.
-- Deleting a reminder marks its task cancelled (`[-]`). Deleting a task completes its reminder.
-
-Tasks are matched by a `🆔` id. The id-to-reminder mapping lives in `.reminders-sync.json`, which is git-ignored.
-
 ## Meals (Macros plugin)
-- **Ingredients** (`Food/Ingredients/`): created by Macros' **Find food** search (USDA FoodData Central). Each note holds nutrients per `serving_size`: calories, protein, carbs, fat, fiber, sugar, and vitamins and minerals.
+- **Ingredients** (`Food/Ingredients/`): created by Macros' **Find food** search (USDA FoodData Central for basic foods; Open Food Facts for packaged products, by name or barcode). Each note holds nutrients per `serving_size`: calories, protein, carbs, fat, fiber, sugar, and vitamins and minerals.
 - **Recipes** (`Food/Recipes/`, template `Templates/Recipe.md`): list the ingredients with their weights in grams in the ` ```macros ` block (`Oats: 80g`). The Nutrition section shows totals and per-serving values, which are saved to the recipe's frontmatter for `Dashboards/Food.md`.
-- **Daily note → 🍽️ Meals:** **Add recipe** asks for a recipe and a number of servings, adds the scaled ingredients to that day's ` ```macros ` block, and bumps the `meals` counter. The summary compares the day's totals with the Macros daily targets (fiber target: 30 g) and saves `kcal`, `protein_g`, `carbs_g`, `fat_g` and `fiber_g` to frontmatter.
+- **Daily note → 🍽️ Meals:** **Add recipe** asks for a recipe and a number of servings, adds the scaled ingredients to that day's ` ```macros ` block, and bumps the `meals` counter. The summary compares the day's totals with the Macros daily targets (fiber target: 35 g) and saves `kcal`, `protein_g`, `carbs_g`, `fat_g` and `fiber_g` to frontmatter.
 
 ## Training (Workout Planner plugin)
-- **Exercises** (`Training/Exercises/`, template `Templates/Exercise.md`): **Import exercise** searches [free-exercise-db](https://github.com/yuhonas/free-exercise-db) (800+ public-domain exercises) and fills in equipment, primary and secondary muscles, level, instructions and images. `tags` holds Workout Planner's muscle groups, which drive its heatmap.
+- **Exercises** (`Training/Exercises/`, template `Templates/Exercise.md`): **Import exercise** searches [free-exercise-db](https://github.com/yuhonas/free-exercise-db) (800+ public-domain exercises) and fills in equipment, primary and secondary muscles, level, instructions and images. `tags` holds only the *primary* muscle groups (max 3), because Workout Planner's heatmap gives every tag a set's full volume. The full detail stays in `primary_muscles` / `secondary_muscles`. The daily summary and the Training dashboard's **Sets per muscle** table count a set as 1 for each primary muscle and ½ for each secondary muscle.
 - **Daily note → 🏋️ Training:** pick the day's exercises under **Plan**, then log sets with **Log set** (Workout Planner's Quick Log). The summary shows planned vs done, reps and weight, volume, personal records, muscles worked and equipment needed. It also ticks the `training` habit.
 - Sets are stored in `Training/Logs/workout_logs.csv`, which is git-ignored.
 
@@ -38,7 +28,6 @@ Tasks are matched by a `🆔` id. The id-to-reminder mapping lives in `.reminder
 | `Dashboards/Habits.md` | Tables, heatmaps and charts |
 | `Dashboards/Tasks.md` | Tasks by area, overdue and upcoming |
 | `Scripts/fetchCommits.js` | Counts your GitHub commits for the day |
-| `Scripts/syncReminders.js`, `Scripts/reminders-bridge/` | Two-way sync with Apple Reminders (EventKit helper) |
 | `Templates/Recipe.md`, `Templates/Exercise.md` | Recipe and exercise templates |
 | `Dashboards/Food.md`, `Dashboards/Training.md` | Recipe library, nutrition history; exercise library, training history |
 | `Scripts/nutrition.js`, `Scripts/addRecipeToDay.js` | Nutrition totals; add a recipe to the day |

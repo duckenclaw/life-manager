@@ -17,7 +17,7 @@ const NUTRIENTS = {
 	fiber: { keys: ["fiber"], label: "Fiber", unit: "g" },
 	sugar: { keys: ["sugar", "sugars"], label: "Sugar", unit: "g" },
 };
-const FIBER_TARGET = 30; // g/day; the other targets come from Macros settings
+const FIBER_TARGET = 35; // g/day (~14 g per 1000 kcal); the other targets come from Macros settings
 
 const macros = app.plugins.plugins.macros;
 const folder = macros?.settings?.storageFolder ?? "Food/Ingredients";

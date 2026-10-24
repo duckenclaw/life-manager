@@ -7,6 +7,15 @@ Import exercises from the free-exercise-db (800+ exercises, with equipment, musc
 ```workout-dashboard
 ```
 
+## Sets per muscle (last 7 days)
+```js-engine
+const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
+const rc = engine.reactive(async () => engine.markdown.create(await run("Scripts/muscleVolume.js", { days: 7 })));
+const csv = app.plugins.plugins["workout-planner"]?.settings?.csvLogFilePath ?? "Training/Logs/workout_logs.csv";
+component.registerEvent(app.vault.on("modify", (f) => { if (f.path === csv) rc.refresh(); }));
+return rc;
+```
+
 ## Exercise library
 ```dataview
 TABLE WITHOUT ID
