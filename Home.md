@@ -2,7 +2,7 @@
 
 - 📅 **Today:** open it from the Calendar sidebar, or use the command *Daily notes: Open today's daily note*
 - 📊 [[Dashboards/Habits|Habits dashboard]]
-- 🍽️ [[Dashboards/Food|Food & recipes]] · 🏋️ [[Dashboards/Training|Training]]
+- 🍽️ [[Dashboards/Food|Food & recipes]] · 🎯 [[Food/Nutrition Goals|Nutrition goals]] · 🏋️ [[Dashboards/Training|Training]]
 - ✅ [[Dashboards/Tasks|Tasks dashboard]] · 📥 [[Tasks/Inbox|Inbox]]
 - Areas: [[Tasks/Work|💼 Work]] · [[Tasks/Uni|🎓 Uni]] · [[Tasks/Gamedev|🎮 Gamedev]] · [[Tasks/Personal|🏠 Personal]]
 - 🗓️ Calendar: command *Full Calendar: Open calendar* (work meetings + `Events/`)

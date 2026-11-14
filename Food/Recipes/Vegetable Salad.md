@@ -5,6 +5,12 @@ servings: 5
 prep_min: 10
 tags:
   - recipe
+kcal_per_serving: 75
+protein_per_serving: 2.9
+carbs_per_serving: 9.9
+fat_per_serving: 3.2
+fiber_per_serving: 2.6
+serving_g: 122
 ---
 # Vegetable Salad
 
