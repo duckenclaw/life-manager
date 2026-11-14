@@ -20,6 +20,13 @@ A tasks, habits and events system for Obsidian that works on desktop and mobile.
 - **Exercises** (`Training/Exercises/`, template `Templates/Exercise.md`): **Import exercise** searches [free-exercise-db](https://github.com/yuhonas/free-exercise-db) (800+ public-domain exercises) and fills in equipment, primary and secondary muscles, level, instructions and images. `tags` holds only the *primary* muscle groups (max 3), because Workout Planner's heatmap gives every tag a set's full volume. The full detail stays in `primary_muscles` / `secondary_muscles`. The daily summary and the Training dashboard's **Sets per muscle** table count a set as 1 for each primary muscle and ½ for each secondary muscle.
 - **Daily note → 🏋️ Training:** pick the day's exercises under **Plan**, then log sets with **Log set** (Workout Planner's Quick Log). The summary shows planned vs done, reps and weight, volume, personal records, muscles worked and equipment needed. It also ticks the `training` habit.
 - Sets are stored in `Training/Logs/workout_logs.csv`, which is git-ignored.
+- **Daily note → 🏋️ Plan workout:** builds a superset day. Pick a grouping (chest + upper back, biceps + triceps, legs + abs/lower back, shoulders + legs) and 3 or 4 pairs.
+  - *Periodisation:* the two muscle groups alternate heavy (4×5–6, max weight) and light (3×12–15, technique). Each grouping flips them from its last session; you can override it in the pop-up. `Dashboards/Training.md → Periodisation` shows last and next load per group.
+  - *Variation:* about half of last session's exercises stay; the rest are swapped for exercises not done in the last 2 sessions, preferring the same push/pull pattern on other equipment. If your library has nothing fresh, one is imported from the free-exercise-db automatically.
+  - *Targets:* weights come from your last logged session of each exercise (+2.5 kg when you hit the top of the rep range).
+  - Each exercise gets a **Log set** button that opens Quick Log prefilled with the exercise, reps and weight.
+- **Daily note → 🧘 Stretching:** a fixed full-body routine (incl. front and middle split work) plus 2 targeted stretches per trained group, rotating, with image cues. **Done stretching** ticks the habit.
+- The two leg days differ: legs + abs/lower back is quad-focused; shoulders + legs covers hamstrings, glutes and calves. Groupings, muscles, rep ranges and stretches are all in `Scripts/trainingConfig.json`.
 
 ## Structure
 | Path | Purpose |
@@ -32,6 +39,8 @@ A tasks, habits and events system for Obsidian that works on desktop and mobile.
 | `Dashboards/Food.md`, `Dashboards/Training.md` | Recipe library, nutrition history; exercise library, training history |
 | `Scripts/nutrition.js`, `Scripts/addRecipeToDay.js` | Nutrition totals; add a recipe to the day |
 | `Scripts/importExercise.js`, `Scripts/trainingSummary.js`, `Scripts/quickLog.js` | Exercise import; daily training summary; Quick Log button |
+| `Scripts/planWorkout.js`, `Scripts/workoutPlan.js`, `Scripts/logPlannedSet.js`, `Scripts/stretchPlan.js`, `Scripts/periodisation.js` | Superset planner button; plan view with Log set buttons; prefilled Quick Log; stretching view; periodisation table |
+| `Scripts/lib/planner.js`, `Scripts/lib/exerciseDb.js`, `Scripts/trainingConfig.json` | Planning logic; free-exercise-db helpers; planner settings |
 | `Scripts/applyEnv.js` | Copies `.env` values into plugin settings |
 | `Food/`, `Training/Exercises/` | Shared ingredient, recipe and exercise library (tracked) |
 | `Daily/`, `Tasks/`, `Events/`, `Training/Logs/workout_logs.csv` | Your personal data (git-ignored) |

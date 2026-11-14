@@ -25,6 +25,9 @@ const planned = list(fm.planned_exercises).map((entry) => {
 	return { name: f ? f.basename : link, file: f };
 });
 
+// Targets from the superset planner (Scripts/planWorkout.js), when the day was planned with it
+const planTargets = new Map(list(fm.workout_plan).map((p) => [String(p.exercise).toLowerCase(), p]));
+
 // Sets logged on this (local) day
 let logs = [];
 if (api) {
@@ -68,11 +71,14 @@ for (const r of rows) {
 	sec.forEach((x) => secondary.set(x, (secondary.get(x) ?? 0) + 1));
 	list(m.equipment).forEach((x) => equipment.add(x));
 	if (sets.length) anyLogged = true;
-	const n = sets.length || Number(m.default_sets) || 0;
+	const n = sets.length || Number(planTargets.get(r.name.toLowerCase())?.sets) || Number(m.default_sets) || 0;
 	prim.forEach((x) => setsPerMuscle.set(x, (setsPerMuscle.get(x) ?? 0) + n));
 	sec.forEach((x) => setsPerMuscle.set(x, (setsPerMuscle.get(x) ?? 0) + n * SECONDARY_WEIGHT));
 
-	const plan = m.default_sets ? `${m.default_sets}×${m.default_reps ?? "?"} @ ${m.default_weight ?? 0} kg` : "–";
+	const target = planTargets.get(r.name.toLowerCase());
+	const plan = target
+		? `${target.sets}×${String(target.reps).replace("-", "–")} @ ${target.weight == null || target.weight === "" ? "?" : target.weight} kg`
+		: m.default_sets ? `${m.default_sets}×${m.default_reps ?? "?"} @ ${m.default_weight ?? 0} kg` : "–";
 	const volume = sets.reduce((s, l) => s + (Number(l.volume) || Number(l.reps) * Number(l.weight) || 0), 0);
 	totalSets += sets.length;
 	totalVolume += volume;

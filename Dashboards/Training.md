@@ -2,9 +2,16 @@
 
 `BUTTON[import-exercise]` `BUTTON[new-exercise]` `BUTTON[log-set]`
 
-Import exercises from the free-exercise-db (800+ exercises, with equipment, muscles and images), or create your own. Plan them in the daily note's **Training** section and log sets with **Log set**.
+Import exercises from the free-exercise-db (800+ exercises, with equipment, muscles and images), or create your own. Plan a superset day with **🏋️ Plan workout** in the daily note (or pick exercises by hand under **Plan**) and log sets with **Log set**. Planner settings: `Scripts/trainingConfig.json`.
 
 ```workout-dashboard
+```
+
+## Periodisation
+Heavy and light alternate per muscle group: each grouping flips them from its last session.
+```js-engine
+const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
+return engine.markdown.create(await run("Scripts/periodisation.js", { sessions: 8 }));
 ```
 
 ## Sets per muscle (last 7 days)

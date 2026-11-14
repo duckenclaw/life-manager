@@ -21,7 +21,7 @@ planned_exercises: []
 
 ## ⚡ Today
 
-`BUTTON[add-recipe]` `BUTTON[food-search]` `BUTTON[log-set]` `BUTTON[import-exercise]`
+`BUTTON[plan-workout]` `BUTTON[add-recipe]` `BUTTON[food-search]` `BUTTON[log-set]` `BUTTON[import-exercise]`
 
 > [!check]+ Checklist
 > - 🏋️ Training `INPUT[toggle:training]`
@@ -60,11 +60,23 @@ return rc;
 
 ```js-engine
 const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
+return await run("Scripts/workoutPlan.js", { path: context.file.path, component });
+```
+
+```js-engine
+const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
 const rc = engine.reactive(async () => engine.markdown.create(await run("Scripts/trainingSummary.js", { path: context.file.path })));
 const csv = app.plugins.plugins["workout-planner"]?.settings?.csvLogFilePath ?? "Training/Logs/workout_logs.csv";
 component.registerEvent(app.metadataCache.on("changed", (f) => { if (f.path === context.file.path) rc.refresh(); }));
 component.registerEvent(app.vault.on("modify", (f) => { if (f.path === csv) rc.refresh(); }));
 return rc;
+```
+
+## 🧘 Stretching
+
+```js-engine
+const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
+return await run("Scripts/stretchPlan.js", { path: context.file.path, component });
 ```
 
 ## Notes
@@ -233,6 +245,16 @@ style: default
 actions:
   - type: command
     command: macros:open-live-search
+```
+
+```meta-bind-button
+label: "🏋️ Plan workout"
+id: plan-workout
+hidden: true
+style: primary
+actions:
+  - type: js
+    file: Scripts/planWorkout.js
 ```
 
 ```meta-bind-button
