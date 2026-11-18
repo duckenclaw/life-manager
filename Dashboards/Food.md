@@ -1,10 +1,27 @@
 # 🍽️ Food
 
-`BUTTON[new-recipe]` `BUTTON[food-search]` `BUTTON[food-manual]`
+`BUTTON[new-recipe]` `BUTTON[new-meal-plan]` `BUTTON[food-search]` `BUTTON[food-manual]`
 
 🎯 [[Food/Nutrition Goals|Nutrition goals]]: 3000 kcal · 170 g protein · 90 g fat · 375 g carbs
 
 Ingredients come from USDA through the **Macros** plugin (values per serving, usually 100 g). Recipes list ingredient weights in grams; their per-serving numbers update each time you open the recipe.
+
+## Meal plans
+A whole day of meals. **📋 Apply meal plan** in a daily note adds them all at once; remove or adjust what you didn't eat there. Open a plan to edit it and see its statistics. **💾 Save day as plan** in a daily note makes a new plan from a logged day.
+```dataview
+TABLE WITHOUT ID
+  file.link AS Plan,
+  choice(default_plan, "⭐", "") AS Default,
+  length(meals) AS Items,
+  plan_kcal AS kcal,
+  plan_protein_g AS "Protein g",
+  plan_carbs_g AS "Carbs g",
+  plan_fat_g AS "Fat g",
+  plan_fiber_g AS "Fiber g"
+FROM "Food/Meal Plans"
+WHERE type = "meal-plan"
+SORT default_plan DESC, file.name ASC
+```
 
 ## Recipes
 ```dataview
@@ -32,7 +49,8 @@ TABLE WITHOUT ID
   carbs_g AS "Carbs g",
   fat_g AS "Fat g",
   fiber_g AS "Fiber g",
-  meals AS Meals
+  meals AS Meals,
+  meal_plan AS Plan
 FROM "Daily"
 WHERE file.day AND file.day >= date(today) - dur(14 days) AND kcal != null
 SORT file.day DESC
@@ -74,6 +92,18 @@ actions:
   - type: templaterCreateNote
     templateFile: Templates/Recipe.md
     folderPath: Food/Recipes
+    openNote: true
+```
+
+```meta-bind-button
+label: "📋 New meal plan"
+id: new-meal-plan
+hidden: true
+style: default
+actions:
+  - type: templaterCreateNote
+    templateFile: Templates/Meal Plan.md
+    folderPath: Food/Meal Plans
     openNote: true
 ```
 

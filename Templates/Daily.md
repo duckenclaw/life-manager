@@ -21,7 +21,7 @@ planned_exercises: []
 
 ## ⚡ Today
 
-`BUTTON[plan-workout]` `BUTTON[add-recipe]` `BUTTON[food-search]` `BUTTON[log-set]` `BUTTON[import-exercise]`
+`BUTTON[plan-workout]` `BUTTON[apply-meal-plan]` `BUTTON[add-recipe]` `BUTTON[food-search]` `BUTTON[log-set]` `BUTTON[import-exercise]`
 
 > [!check]+ Checklist
 > - 🏋️ Training `INPUT[toggle:training]`
@@ -44,6 +44,11 @@ planned_exercises: []
 
 
 ## 🍽️ Meals
+
+```js-engine
+const run = async (script, args) => { const code = await app.vault.adapter.read(script); const F = Object.getPrototypeOf(async function () {}).constructor; return new F("app", "obsidian", "args", code)(app, obsidian, args); };
+return await run("Scripts/dayMeals.js", { path: context.file.path, component });
+```
 
 ```macros
 id: <% tp.file.title %>
@@ -225,6 +230,16 @@ style: default
 actions:
   - type: js
     file: Scripts/fetchCommits.js
+```
+
+```meta-bind-button
+label: "📋 Apply meal plan"
+id: apply-meal-plan
+hidden: true
+style: primary
+actions:
+  - type: js
+    file: Scripts/applyMealPlan.js
 ```
 
 ```meta-bind-button
