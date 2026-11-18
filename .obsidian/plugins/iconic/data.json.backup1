@@ -1,7 +1,7 @@
 {
   "biggerIcons": "mobile",
   "clickableIcons": "desktop",
-  "showAllFileIcons": false,
+  "showAllFileIcons": true,
   "showAllFolderIcons": false,
   "minimalFolderIcons": true,
   "showMarkdownTabIcons": true,
@@ -31,8 +31,148 @@
   "fileIcons": {},
   "bookmarkIcons": {},
   "tagIcons": {},
-  "propertyIcons": {},
+  "propertyIcons": {
+    "cat_clean": {
+      "icon": "lucide-spray-can"
+    },
+    "cat_play": {
+      "icon": "lucide-cat"
+    },
+    "guitar_min": {
+      "icon": "lucide-guitar"
+    },
+    "litter": {
+      "icon": "lucide-paw-print"
+    },
+    "meals": {
+      "icon": "lucide-beef"
+    },
+    "pages": {
+      "icon": "lucide-book-open-text"
+    },
+    "skincare_am": {
+      "icon": "lucide-sunrise"
+    },
+    "skincare_pm": {
+      "icon": "lucide-sunset"
+    },
+    "smoking": {
+      "icon": "lucide-cigarette"
+    },
+    "songs_learned": {
+      "icon": "lucide-music"
+    },
+    "stretching": {
+      "icon": "lucide-person-standing"
+    },
+    "training": {
+      "icon": "lucide-dumbbell"
+    },
+    "weight": {
+      "icon": "lucide-scale"
+    }
+  },
   "ribbonIcons": {},
-  "fileRules": [],
+  "fileRules": [
+    {
+      "id": "AnfiS",
+      "name": "Daily Notes",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "tree",
+          "operator": "contains",
+          "value": "Daily"
+        }
+      ],
+      "enabled": true,
+      "icon": "lucide-notebook-pen",
+      "color": "gray"
+    },
+    {
+      "id": "XHuMe",
+      "name": "Dashboards",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "tree",
+          "operator": "contains",
+          "value": "Dashboards"
+        }
+      ],
+      "enabled": true,
+      "icon": "lucide-database"
+    },
+    {
+      "id": "nNwDZ",
+      "name": "Events",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "tree",
+          "operator": "contains",
+          "value": "Dashboards"
+        }
+      ],
+      "enabled": true,
+      "icon": "lucide-calendar-clock"
+    },
+    {
+      "id": "14pMW",
+      "name": "Tasks",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "tree",
+          "operator": "contains",
+          "value": "Tasks"
+        }
+      ],
+      "enabled": true,
+      "icon": "lucide-circle-check-big"
+    },
+    {
+      "id": "h83f8",
+      "name": "Templates",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "tree",
+          "operator": "contains",
+          "value": "Templates"
+        }
+      ],
+      "enabled": true,
+      "icon": "lucide-notepad-text-dashed"
+    },
+    {
+      "id": "bB0eS",
+      "name": "README",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "name",
+          "operator": "contains",
+          "value": "README"
+        }
+      ],
+      "enabled": true,
+      "icon": "lucide-book-marked"
+    },
+    {
+      "id": "tYXUb",
+      "name": "Home",
+      "match": "all",
+      "conditions": [
+        {
+          "source": "name",
+          "operator": "contains",
+          "value": "Home"
+        }
+      ],
+      "enabled": true,
+      "icon": "lucide-home"
+    }
+  ],
   "folderRules": []
 }

@@ -17,8 +17,16 @@
   "repDuration": 5,
   "defaultRepsPerSet": 0,
   "recentExercises": [
+    "Low Cable Crossover",
     "Bent-Arm Barbell Pullover",
-    "External Rotation"
+    "Dumbbell Flyes",
+    "Bent Over Two-Dumbbell Row",
+    "Neck Press",
+    "Reverse Grip Triceps Pushdown",
+    "Triceps Overhead Extension with Rope",
+    "Reverse Cable Curl",
+    "Drag Curl",
+    "Close-Grip Dumbbell Press"
   ],
   "quickWeightIncrement": 2.5,
   "weightUnit": "kg"

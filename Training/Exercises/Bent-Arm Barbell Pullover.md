@@ -3,16 +3,12 @@ exercise_name: Bent-Arm Barbell Pullover
 exercise_type: strength
 tags:
   - back
-  - chest
-  - shoulders
-  - triceps
 equipment:
   - barbell
 primary_muscles:
   - lats
 secondary_muscles:
   - chest
-  - lats
   - shoulders
   - triceps
 level: intermediate

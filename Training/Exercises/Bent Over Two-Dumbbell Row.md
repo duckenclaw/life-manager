@@ -3,8 +3,6 @@ exercise_name: Bent Over Two-Dumbbell Row
 exercise_type: strength
 tags:
   - back
-  - biceps
-  - shoulders
 equipment:
   - dumbbell
 primary_muscles:

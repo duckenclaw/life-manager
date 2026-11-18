@@ -2,6 +2,8 @@
 
 `BUTTON[new-recipe]` `BUTTON[food-search]` `BUTTON[food-manual]`
 
+🎯 [[Food/Nutrition Goals|Nutrition goals]]: 3000 kcal · 170 g protein · 90 g fat · 375 g carbs
+
 Ingredients come from USDA through the **Macros** plugin (values per serving, usually 100 g). Recipes list ingredient weights in grams; their per-serving numbers update each time you open the recipe.
 
 ## Recipes

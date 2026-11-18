@@ -1,0 +1,59 @@
+---
+exercise_name: Side Lateral Raise
+exercise_type: strength
+tags:
+  - shoulders
+equipment:
+  - dumbbell
+primary_muscles:
+  - shoulders
+secondary_muscles: []
+level: beginner
+category: strength
+default_sets: 3
+default_reps: 15
+default_weight: 0
+source: free-exercise-db/Side_Lateral_Raise
+---
+# Side Lateral Raise
+
+| | |
+|---|---|
+| 🏋️ Equipment | `INPUT[inlineListSuggester(option(barbell), option(dumbbell), option(machine), option(cable), option(body only), option(kettlebells), option(bands), option(e-z curl bar), option(medicine ball), option(exercise ball), option(foam roll), option(other)):equipment]` |
+| 🎯 Primary muscles | `INPUT[inlineListSuggester(option(abdominals), option(abductors), option(adductors), option(biceps), option(calves), option(chest), option(forearms), option(glutes), option(hamstrings), option(lats), option(lower back), option(middle back), option(neck), option(quadriceps), option(shoulders), option(traps), option(triceps)):primary_muscles]` |
+| ➕ Secondary muscles | `INPUT[inlineListSuggester(option(abdominals), option(abductors), option(adductors), option(biceps), option(calves), option(chest), option(forearms), option(glutes), option(hamstrings), option(lats), option(lower back), option(middle back), option(neck), option(quadriceps), option(shoulders), option(traps), option(triceps)):secondary_muscles]` |
+| 🗺️ Heatmap groups (primary only, max 3) | `INPUT[inlineListSuggester(option(chest), option(back), option(shoulders), option(biceps), option(triceps), option(quads), option(hamstrings), option(glutes), option(calves), option(abs), option(core), option(forearms), option(traps), option(rear_delts)):tags]` |
+| 📋 Default | `INPUT[number:default_sets]` sets × `INPUT[number:default_reps]` reps @ `INPUT[number:default_weight]` kg |
+| 📶 Level | `INPUT[inlineSelect(option(beginner), option(intermediate), option(expert)):level]` |
+
+## Progress
+
+```js-engine
+const api = window.WorkoutPlannerAPI;
+if (!api) return "Install the Workout Planner plugin to see progress.";
+const s = await api.getExerciseStats(context.file.basename);
+if (!s || !s.totalSets) return "No sets logged yet.";
+return engine.markdown.create(`🏆 **PR:** ${s.prWeight} kg × ${s.prReps} · **Sets:** ${s.totalSets} · **Volume:** ${Math.round(s.totalVolume)} kg · **Last:** ${s.lastWorkoutDate ?? "–"}`);
+```
+
+```workout-chart
+exercise: Side Lateral Raise
+type: weight
+dateRange: 90
+showTrendLine: true
+height: 250
+```
+
+```workout-log
+exercise: Side Lateral Raise
+limit: 20
+```
+
+## Instructions
+
+![Side Lateral Raise|300](https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg) ![Side Lateral Raise|300](https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/1.jpg)
+
+1. Pick a couple of dumbbells and stand with a straight torso and the dumbbells by your side at arms length with the palms of the hand facing you. This will be your starting position.
+2. While maintaining the torso in a stationary position (no swinging), lift the dumbbells to your side with a slight bend on the elbow and the hands slightly tilted forward as if pouring water in a glass. Continue to go up until you arms are parallel to the floor. Exhale as you execute this movement and pause for a second at the top.
+3. Lower the dumbbells back down slowly to the starting position as you inhale.
+4. Repeat for the recommended amount of repetitions.

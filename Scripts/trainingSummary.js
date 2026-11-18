@@ -25,6 +25,9 @@ const planned = list(fm.planned_exercises).map((entry) => {
 	return { name: f ? f.basename : link, file: f };
 });
 
+// Targets from the superset planner (Scripts/planWorkout.js), when the day was planned with it
+const planTargets = new Map(list(fm.workout_plan).map((p) => [String(p.exercise).toLowerCase(), p]));
+
 // Sets logged on this (local) day
 let logs = [];
 if (api) {
@@ -51,17 +54,31 @@ for (const [key, ls] of byExercise) {
 }
 if (!rows.length) return "*Nothing planned yet. Pick exercises above, or log a set with **🏋️ Log set**.*";
 
+// Sets per muscle: a set counts 1 for each primary muscle and ½ for each secondary one.
+// Uses logged sets; exercises with nothing logged yet count their planned default sets.
+const SECONDARY_WEIGHT = 0.5;
 const primary = new Map(), secondary = new Map(), equipment = new Set();
+const setsPerMuscle = new Map();
+let anyLogged = false;
 let totalSets = 0, totalVolume = 0;
 const tableRows = [];
 for (const r of rows) {
 	const m = r.file ? meta(r.file) : {};
 	const sets = byExercise.get(r.name.toLowerCase()) ?? byExercise.get(String(m.exercise_name ?? "").toLowerCase()) ?? [];
-	list(m.primary_muscles).forEach((x) => primary.set(x, (primary.get(x) ?? 0) + 1));
-	list(m.secondary_muscles).forEach((x) => secondary.set(x, (secondary.get(x) ?? 0) + 1));
+	const prim = [...new Set(list(m.primary_muscles))];
+	const sec = [...new Set(list(m.secondary_muscles))].filter((x) => !prim.includes(x));
+	prim.forEach((x) => primary.set(x, (primary.get(x) ?? 0) + 1));
+	sec.forEach((x) => secondary.set(x, (secondary.get(x) ?? 0) + 1));
 	list(m.equipment).forEach((x) => equipment.add(x));
+	if (sets.length) anyLogged = true;
+	const n = sets.length || Number(planTargets.get(r.name.toLowerCase())?.sets) || Number(m.default_sets) || 0;
+	prim.forEach((x) => setsPerMuscle.set(x, (setsPerMuscle.get(x) ?? 0) + n));
+	sec.forEach((x) => setsPerMuscle.set(x, (setsPerMuscle.get(x) ?? 0) + n * SECONDARY_WEIGHT));
 
-	const plan = m.default_sets ? `${m.default_sets}×${m.default_reps ?? "?"} @ ${m.default_weight ?? 0} kg` : "–";
+	const target = planTargets.get(r.name.toLowerCase());
+	const plan = target
+		? `${target.sets}×${String(target.reps).replace("-", "–")} @ ${target.weight == null || target.weight === "" ? "?" : target.weight} kg`
+		: m.default_sets ? `${m.default_sets}×${m.default_reps ?? "?"} @ ${m.default_weight ?? 0} kg` : "–";
 	const volume = sets.reduce((s, l) => s + (Number(l.volume) || Number(l.reps) * Number(l.weight) || 0), 0);
 	totalSets += sets.length;
 	totalVolume += volume;
@@ -90,6 +107,7 @@ return [
 	...tableRows,
 	"",
 	`**🎯 Primary:** ${muscles(primary)} · **➕ Secondary:** ${muscles(secondary)}`,
+	`**💪 Sets per muscle${anyLogged ? "" : " (planned)"}:** ${[...setsPerMuscle].sort((a, b) => b[1] - a[1]).map(([x, v]) => `${x} ${v}`).join(" · ") || "–"}`,
 	`**🏋️ Equipment:** ${[...equipment].join(", ") || "–"} · **Sets:** ${totalSets} · **Volume:** ${Math.round(totalVolume)} kg`,
 	api ? "" : "\n> [!warning] Install the Workout Planner plugin to log sets.",
 ].join("\n");

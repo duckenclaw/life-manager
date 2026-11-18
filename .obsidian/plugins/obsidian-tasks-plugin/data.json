@@ -76,7 +76,7 @@
     "cancelled": true
   },
   "dismissedNotices": {
-    "live-preview-callout-warning": false
+    "live-preview-callout-warning": true
   },
   "features": {
     "INTERNAL_TESTING_ENABLED_BY_DEFAULT": true

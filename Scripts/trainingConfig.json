@@ -1,0 +1,72 @@
+{
+	"_comment": "Training planner settings, read by Scripts/planWorkout.js, workoutPlan.js, stretchPlan.js and the Training dashboard. Muscle names are free-exercise-db's (the values of primary_muscles in exercise notes).",
+
+	"groups": {
+		"chest": { "label": "Chest", "muscles": ["chest"] },
+		"upper_back": { "label": "Upper back", "muscles": ["lats", "middle back", "traps"] },
+		"biceps": { "label": "Biceps", "muscles": ["biceps", "forearms"] },
+		"triceps": { "label": "Triceps", "muscles": ["triceps"] },
+		"quads": { "label": "Legs (quads)", "muscles": ["quadriceps", "adductors"] },
+		"core": { "label": "Abs & lower back", "muscles": ["abdominals", "lower back"] },
+		"shoulders": { "label": "Shoulders", "muscles": ["shoulders"] },
+		"posterior": { "label": "Legs (hamstrings, glutes, calves)", "muscles": ["hamstrings", "glutes", "calves", "abductors"] }
+	},
+
+	"splits": [
+		{ "id": "chest_back", "label": "Chest + upper back", "groups": ["chest", "upper_back"] },
+		{ "id": "arms", "label": "Biceps + triceps", "groups": ["biceps", "triceps"] },
+		{ "id": "quads_core", "label": "Legs + abs/lower back", "groups": ["quads", "core"] },
+		{ "id": "shoulders_posterior", "label": "Shoulders + legs", "groups": ["shoulders", "posterior"] }
+	],
+
+	"loads": {
+		"heavy": { "label": "Heavy", "icon": "🔴", "sets": 4, "repsMin": 5, "repsMax": 6, "rest": "2–3 min", "cue": "Max weight you can move with clean reps" },
+		"light": { "label": "Light", "icon": "🟢", "sets": 3, "repsMin": 12, "repsMax": 15, "rest": "60–90 s", "cue": "Lighter weight, slow eccentric, perfect technique" }
+	},
+
+	"defaultPairs": 3,
+	"keepFromLastSession": 0.5,
+	"avoidRecentSessions": 2,
+	"excludeCategories": ["stretching", "cardio", "plyometrics"],
+	"autoImportEquipment": ["barbell", "dumbbell", "cable", "machine", "body only", "e-z curl bar"],
+	"autoImportLevels": ["beginner", "intermediate"],
+	"autoImportExcludeWords": ["bosu", "stability ball", "exercise ball", "partner", "band", "kettlebell"],
+
+	"stretching": {
+		"hold": "30–45 s each side · 2 rounds",
+		"perGroup": 2,
+		"fullBody": [
+			"World's Greatest Stretch",
+			"Kneeling Hip Flexor",
+			"Seated Floor Hamstring Stretch",
+			"Side Lying Groin Stretch",
+			"Child's Pose",
+			"Cat Stretch",
+			"Chest And Front Of Shoulder Stretch",
+			"Side-Lying Floor Stretch",
+			"Calf Stretch Hands Against Wall",
+			"Front split",
+			"Middle split"
+		],
+		"custom": {
+			"Front split": {
+				"imagesFrom": "Kneeling Hip Flexor",
+				"cue": "From a low lunge, slide the front heel forward and the back knee back, hips square. Hands on blocks or the floor; go only as low as you can breathe calmly. Both sides."
+			},
+			"Middle split": {
+				"imagesFrom": "The Straddle",
+				"cue": "Feet wide, toes up, back straight. Hinge forward from the hips with hands on the floor, then slowly widen. Keep knees pointing to the ceiling."
+			}
+		},
+		"targeted": {
+			"chest": ["Dynamic Chest Stretch", "Behind Head Chest Stretch", "Elbows Back"],
+			"upper_back": ["Middle Back Stretch", "One Arm Against Wall", "Upper Back Stretch", "Spinal Stretch", "Dynamic Back Stretch"],
+			"biceps": ["Seated Biceps", "Standing Biceps Stretch", "Kneeling Forearm Stretch"],
+			"triceps": ["Overhead Triceps", "Tricep Side Stretch", "Triceps Stretch"],
+			"quads": ["Quad Stretch", "On Your Side Quad Stretch", "Lying Prone Quadriceps", "All Fours Quad Stretch", "Standing Hip Flexors", "Intermediate Hip Flexor and Quad Stretch"],
+			"core": ["Overhead Stretch", "Standing Lateral Stretch", "Hug Knees To Chest", "Pelvic Tilt Into Bridge", "Seated Overhead Stretch"],
+			"shoulders": ["Shoulder Stretch", "Seated Front Deltoid", "Round The World Shoulder Stretch", "Upward Stretch"],
+			"posterior": ["Lying Glute", "90/90 Hamstring", "Seated Glute", "Runner's Stretch", "Knee Across The Body", "Lying Hamstring", "Standing Soleus And Achilles Stretch", "Seated Calf Stretch"]
+		}
+	}
+}
