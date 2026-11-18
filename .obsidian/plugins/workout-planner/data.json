@@ -17,16 +17,16 @@
   "repDuration": 5,
   "defaultRepsPerSet": 0,
   "recentExercises": [
-    "Dumbbell Flyes",
-    "Barbell Full Squat",
-    "Dumbbell Shrug",
-    "Leverage Shoulder Press",
-    "Reverse Machine Flyes",
-    "Triceps Overhead Extension with Rope",
-    "Dips - Chest Version",
     "Low Cable Crossover",
-    "Close-Grip Dumbbell Press",
-    "Seated Cable Rows"
+    "Bent-Arm Barbell Pullover",
+    "Dumbbell Flyes",
+    "Bent Over Two-Dumbbell Row",
+    "Neck Press",
+    "Reverse Grip Triceps Pushdown",
+    "Triceps Overhead Extension with Rope",
+    "Reverse Cable Curl",
+    "Drag Curl",
+    "Close-Grip Dumbbell Press"
   ],
   "quickWeightIncrement": 2.5,
   "weightUnit": "kg"
