@@ -1,16 +1,16 @@
 ---
 type: recipe
 meal_type: lunch
-servings: 5
+servings: 3
 prep_min: 10
 tags:
-  - recipe
-kcal_per_serving: 75
-protein_per_serving: 2.9
-carbs_per_serving: 9.9
-fat_per_serving: 3.2
-fiber_per_serving: 2.6
-serving_g: 122
+- recipe
+kcal_per_serving: 114
+protein_per_serving: 2.3
+carbs_per_serving: 12.7
+fat_per_serving: 7.2
+fiber_per_serving: 3.2
+serving_g: 276
 ---
 # Vegetable Salad
 
@@ -18,29 +18,28 @@ serving_g: 122
 
 ## Ingredients (whole recipe)
 
-> [!note] Weights for pieces and pinches are estimates. Adjust them to match what you actually use.
-> - Cucumber: 1 medium
+> [!note] Weights for pieces and pinches are estimates. Adjust them to match what you actually use. One serving ≈ 280 g; eaten twice a day (with the [[Omelette]] and with lunch).
+> - Cucumber: 1 large (~300 g)
+> - Tomato: 2–3 (~300 g)
 > - Red bell pepper: 1
-> - Red kidney beans: ½ can, drained
 > - Red onion: ½
-> - Olive oil: 1 tbsp
-> - Salt: pinch
-> - Black pepper: pinch
-> - Paprika: pinch
+> - Olive oil: 1½ tbsp
+> - Salt, black pepper, paprika, dried garlic, dried onion
 
 Press **+** to search USDA and add an ingredient, then set its weight in grams, e.g. `Oats: 80g`.
 
 ```macros
 id: recipe-vegetable-salad
-Cucumber: 200g
-Red bell pepper: 120g
-Red kidney beans: 120g
-Lettuce: 100g
+Cucumber: 300g
+Tomato: 300g
+Red bell pepper: 150g
 Red onion: 55g
-Olive oil: 14g
-Salt: 1g
-Black pepper: 1g
-Paprika: 1g
+Olive oil: 20g
+Salt: 1.5g
+Black pepper: 0.5g
+Paprika: 0.5g
+Garlic powder: 0.5g
+Onion powder: 0.5g
 ```
 
 ## Nutrition
@@ -59,5 +58,5 @@ return rc;
 
 ## Steps
 
-1. Chop the vegetables and rinse the beans.
+1. Chop the vegetables.
 2. Toss with olive oil, salt, pepper and paprika.
